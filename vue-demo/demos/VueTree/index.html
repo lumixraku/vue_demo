@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  body {
+    font-family: Menlo, Consolas, monospace;
+    color: #444;
+  }
+
+  .item {
+    cursor: pointer;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  ul {
+    padding-left: 1em;
+    line-height: 1.5em;
+    list-style-type: dot;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- item template -->
+  <script type="text/x-template" id="item-template">
+    <li>
+      <div :class="{bold: isFolder}" @click="toggle" @dblclick="changeType">
+        {{model.name}}
+        <span v-if="isFolder">[{{open ? '-' : '+'}}]</span>
+      </div>
+      <ul v-show="open" v-if="isFolder">
+        <item class="item myclass" v-for="model in model.children" :model="model">
+        </item>
+        <li @click="addChild">+</li>
+      </ul>
+    </li>
+  </script>
+  <p>(You can double click on an item to turn it into a folder.)</p>
+  <!-- the demo root element -->
+  <ul id="demo">
+    <!-- 自定义元素的class是模板的根元素的class -->
+    <!-- :属性名   似乎是给子组件传值用的  -->
+    <item class="item myclass" :model="treeData">
+    </item>
+  </ul>
+  <script src="bundle.js"></script>
+</body>
+
+</html>

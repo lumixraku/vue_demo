@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+  <div id="render-list">
+    <ul>
+      <li v-for="item in todos">
+        {{item.text}}
+      </li>
+    </ul>
+  </div>
+  Reverse Input
+  <div id="userInput">
+    <p>{{ message3 }}</p>
+    <input v-model="message3" />
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+  ToDoList
+  <div id="todo">
+    <input type="text"  v-model="todoItem" v-on:keyup.enter="addTodo" />
+    <ul>
+      <li v-for="item in todolist">
+        {{item.name}}
+        <button v-on:click="removeTodo($index)"></button>
+      </li>
+    </ul>
+  </div>
+  <script src="bundle.js"></script>
+</body>
+
+</html>

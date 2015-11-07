@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="demo">
+    <!-- 这里的 <template> 标签只起到语义上的包裹作用，其本身不会被渲染出来 -->
+    <!-- 更接近于js中的for循环  v-for标签内的内容重复渲染 -->
+    <!-- :id="branch"  相当于 id={{branch}} -->
+    <template v-for="branch in branches">
+      <input type="radio" name="branch" id={{branch}} :value="branch" v-model="currentBranch">
+      <label :for="branch">{{branch}}</label>
+    </template>
+    <p>vuejs/vue@{{currentBranch}}</p>
+    <ul>
+      <li v-for="record in commits">
+        <a :href="record.html_url" target="_blank" class="commit">{{record.sha.slice(0, 7)}}</a>
+        -
+        <span class="message">{{record.commit.message | truncate}}</span>
+        <br> by
+        <span class="author">{{record.commit.author.name}}</span>
+        at
+        <span class="date">{{record.commit.author.date | formatDate}}</span>
+      </li>
+    </ul>
+  </div>
+  <script src="bundle.js"></script>
+</body>
+
+</html>

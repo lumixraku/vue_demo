@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- demo root element -->
+  <div id="demo">
+    <form id="search">
+      Search
+      <input name="query" v-model="searchQuery">
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in gridColumns" @click="sortBy(key)" :class="{active: sortKey == key}">
+            {{key | capitalize}}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- filterBy value [in dataKey] 后面的是可选的
+        filterBy value in 'name' 'power'
+        若没有指定datakey  那么它会在所有条目的所有键的值中作匹配 -->
+        <tr v-for="
+        entry in gridData
+        | filterBy searchQuery
+        | orderBy sortKey sortOrders[sortKey]">
+          <td v-for="key in gridColumns">
+            {{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="bundle.js"></script>
+</body>
+
+</html>
