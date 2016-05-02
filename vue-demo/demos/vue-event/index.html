@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="example">
+        <div class="outer" v-on:click="outer">
+            <button v-on:click.stop="greet">Greet</button>
+            <button v-on:click="greet">GreetToOuter</button>
+        </div>
+    </div>
+    <script src="bundle.js"></script>
+</body>
+
+</html>

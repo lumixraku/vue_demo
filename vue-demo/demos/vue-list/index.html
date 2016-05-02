@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="example-1">
+        <li v-for="item in items">
+            {{ parentMessage }} - {{ $index }} - {{ item.message }}
+        </li>
+    </ul>
+    <ul id="example-2">
+        <!-- 对于数组 index 就是下标 -->
+        <div v-for="(index, item) in items">
+            {{ index }} {{ item.message }}
+        </div>
+    </ul>
+    <ul id="example-3">
+        <template v-for="item in items">
+            <li>{{ item.message }}</li>
+            <li class="divider"></li>
+        </template>
+    </ul>
+    <ul id="example-4_0">
+        <div v-for="(index, item) in items">
+            {{ index }} {{ item.message }}
+        </div>
+    </ul>
+    <ul id="example-4_1">
+        <div v-for="(index, item) in items">
+            {{ index }} {{ item.message }}
+        </div>
+    </ul>
+    <script src="bundle.js"></script>
+</body>
+
+</html>
