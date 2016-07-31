@@ -1,4 +1,4 @@
-var template = '<div><input type="radio" :id="id"  v-model="srStatus" :name="name" :value="id" v-on:change="radioClick(id)"/><label :for="id" :class="{checked: srStatus==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span>ii</label></div>';
+var template = '<div><input type="radio" :id="id"  v-model="srStatus" :name="name" :value="id"/><label :for="id" :class="{checked: srStatus==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span>ii</label></div>';
 
 // <label :for="id" :class="{checked: srStatus==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span></label>
 
@@ -17,7 +17,7 @@ var CheckBox = Vue.extend({
     },
     methods: {
         radioClick: function(id){
-            this.$dispatch('onRadioClick', id);
+            //this.$dispatch('onRadioClick', id);
         }
     },
     computed: {

@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style media="screen">
-        .checked{
-            width: 200px;
+        input[type="radio"]{
+            visibility: hidden;
+            position: absolute;
+        }
+        label {
             display: inline-block;
+            width:50px;
+            height: 50px;
+            background: grey;
+        }
+        .checked{
             background: red;
         }
     </style>

@@ -1,12 +1,10 @@
-var template = '<div><input type="radio" :id="id"  v-model="srStatus" :name="name" :value="id" /><label :for="id" :class="{checked: srStatus==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span>ii</label></div>';
+var template = '<div><input type="radio" :id="id"   :name="name" :value="id" v-on:change="radioClick(id)"/><label :for="id" :class="{checked: radioChoosed==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span></label></div>';
 
-// <label :for="id" :class="{checked: srStatus==id}"><span v-show="checked"><i class="fa fa-check" aria-hidden="true"></i></span></label>
 
 var CheckBox = Vue.extend({
     template: template,
     props: [
-        // 'checked',
-        'srStatus', // 必须有一个外层的全局变量  用于记住当前选中项
+        'radioChoosed', // 必须有一个外层的全局变量  用于记住当前选中项
         'id',
         'handlername',
         'name'
@@ -16,9 +14,9 @@ var CheckBox = Vue.extend({
         }
     },
     methods: {
-        // radioClick: function(id){
-        //     this.$dispatch('onRadioClick', id);
-        // }
+        radioClick: function(id){
+            this.$dispatch('onRadioClick', id);
+        }
     },
     computed: {
 
