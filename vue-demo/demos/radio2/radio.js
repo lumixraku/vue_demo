@@ -22,10 +22,10 @@ var CheckBox = Vue.extend({
 
     },
     watch: {
-        'srStatus': function(val, oldVal) {
-            console.log('watch', val);
-            this.$dispatch(this.handlername, val);
-        }
+        // 'srStatus': function(val, oldVal) {
+        //     console.log('watch', val);
+        //     this.$dispatch(this.handlername, val);
+        // }
     }
 });
 

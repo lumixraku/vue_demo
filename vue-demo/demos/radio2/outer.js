@@ -8,7 +8,7 @@ var TableFieldData = Vue.extend({
     data: function() {
         return {
             list: ['111', '222', '333'],
-            //被选中的
+            //被选中的Id
             choosed: '111', //默认值
         }
     },
