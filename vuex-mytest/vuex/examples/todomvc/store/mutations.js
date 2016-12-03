@@ -11,6 +11,7 @@ export const state = {
 
 export const mutations = {
   addTodo (state, { text }) {
+      console.log('addTodo mutation  ', text);     
     state.todos.push({
       text,
       done: false
