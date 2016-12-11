@@ -92,12 +92,15 @@ export default {
             e.target.value = ''
         },
 
-        // 映射 this.toggleAll() 为 this.$store.commit('toggleAll')
+        //这里的...实际上是ES6的 扩展语法
+        //相当于给 methods {} 扩展出更多的key
+        // mapMutations 的执行结果是一个{}对象
         ...mapMutations([
             'addTodo',
             'toggleAll',
             'clearCompleted'
         ])
+
     },
 
     //Vue2 的filters的定义和Vue1.x 不同

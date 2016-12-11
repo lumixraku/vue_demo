@@ -25,6 +25,9 @@ const mutations = {
 
 // actions are functions that causes side effects and can involve
 // asynchronous operations.
+
+
+//
 const actions = {
   increment: ({ commit }) => commit('increment'),
   decrement: ({ commit }) => commit('decrement'),
@@ -44,6 +47,7 @@ const actions = {
 }
 
 // getters are functions
+// 有点类似于平常用的computed
 const getters = {
   evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
 }

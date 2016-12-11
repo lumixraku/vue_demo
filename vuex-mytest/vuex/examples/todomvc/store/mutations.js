@@ -9,9 +9,11 @@ export const state = {
   todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]')
 }
 
+
+//mutation 中的函数必须是同步函数
+//异步的操作需要通过actions 去完成
 export const mutations = {
   addTodo (state, { text }) {
-      console.log('addTodo mutation  ', text);     
     state.todos.push({
       text,
       done: false

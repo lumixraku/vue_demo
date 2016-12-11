@@ -4,10 +4,14 @@ import store from './store'
 import App from './components/App.vue'
 
 new Vue({
-  store, // inject store to all children  //store包含state mutations actions
+  store, // inject store to all children  //store一般包含state mutations actions
   el: '#app',
-  render: h => h(App)  //App 是一个Vue的component
+  render: h => h(App)  //App 是一个Vue的component的options
+
+  // https://vuejs.org/v2/guide/render-function.html#ad  这里有说明createElement可接受的参数  createElement一般简写为h
 })
+
+
 
 //render 是Vue2 中的写法
 //功能和template差不多, 不过它是一个函数  根据参数 动态的创建元素

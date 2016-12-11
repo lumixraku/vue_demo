@@ -59,52 +59,23 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _store = __webpack_require__(300);
+	var _Counter = __webpack_require__(300);
+
+	var _Counter2 = _interopRequireDefault(_Counter);
+
+	var _store = __webpack_require__(304);
 
 	var _store2 = _interopRequireDefault(_store);
-
-	var _App = __webpack_require__(305);
-
-	var _App2 = _interopRequireDefault(_App);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	new _vue2.default({
-	  store: _store2.default, // inject store to all children  //store包含state mutations actions
 	  el: '#app',
+	  store: _store2.default,
 	  render: function render(h) {
-	    return h(_App2.default);
-	  } //App 是一个Vue的component
+	    return h(_Counter2.default);
+	  }
 	});
-
-	//render 是Vue2 中的写法
-	//功能和template差不多, 不过它是一个函数  根据参数 动态的创建元素
-	//h(App) 的执行结果是一个VNode对象
-
-	// render: function (createElement) {
-	//   return createElement(
-	//     'h' + this.level,   // tag name 标签名称
-	//     this.$slots.default // 子组件中的阵列
-	//   )
-	// },
-	// render 还可以使用jsx 动态的生成元素
-	// new Vue({
-	//   el: '#demo',
-	// -------------------1-------------------
-	//   render (h) {
-	//     return (
-	//       <AnchoredHeading level={1}>
-	//         <span>Hello</span> world!
-	//       </AnchoredHeading>
-	//     )
-	//   }
-	// })
-
-	//1处使用到了ES6{}中定义函数的的写法
-	//实际上相当于
-	// render: function render(h) {
-	//   return 'xx';
-	// }
 
 /***/ },
 /* 2 */
@@ -14091,39 +14062,82 @@
 /* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = {}
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
+	/* script */
+	__vue_exports__ = __webpack_require__(301)
 
-	var _vue = __webpack_require__(299);
+	/* template */
+	var __vue_template__ = __webpack_require__(303)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/luonan/Sites/vue_demo/vuex-mytest/vuex/examples/counter/Counter.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
-	var _vue2 = _interopRequireDefault(_vue);
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-25bedc2c", __vue_options__)
+	  } else {
+	    hotAPI.reload("data-v-25bedc2c", __vue_options__)
+	  }
+	})()}
+	if (__vue_options__.functional) {console.error("[vue-loader] Counter.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
-	var _vuex = __webpack_require__(301);
+	module.exports = __vue_exports__
 
-	var _vuex2 = _interopRequireDefault(_vuex);
-
-	var _mutations = __webpack_require__(302);
-
-	var _plugins = __webpack_require__(303);
-
-	var _plugins2 = _interopRequireDefault(_plugins);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	//和 node 一样  已经通过npm装了 vue 和 vuex
-	_vue2.default.use(_vuex2.default);
-
-	exports.default = new _vuex2.default.Store({
-	  state: _mutations.state,
-	  mutations: _mutations.mutations,
-	  plugins: _plugins2.default
-	});
 
 /***/ },
 /* 301 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _vuex = __webpack_require__(302);
+
+	exports.default = {
+	    computed: (0, _vuex.mapGetters)(['evenOrOdd']),
+
+	    //和mapMutation相似
+	    //mapActions 返回一个{}
+	    //这里这个对象有四个key
+	    //
+	    //'increment': function(){
+	    // this.$store.dispatch('increment')
+	    // }
+	    methods: (0, _vuex.mapActions)(['increment', 'decrement', 'incrementIfOdd', 'incrementAsync'])
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ },
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -14656,1022 +14670,130 @@
 	})));
 
 /***/ },
-/* 302 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var STORAGE_KEY = exports.STORAGE_KEY = 'todos-vuejs';
-
-	// for testing
-	if (navigator.userAgent.indexOf('PhantomJS') > -1) {
-	  window.localStorage.clear();
-	}
-
-	var state = exports.state = {
-	  todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]')
-	};
-
-	var mutations = exports.mutations = {
-	  addTodo: function addTodo(state, _ref) {
-	    var text = _ref.text;
-
-	    console.log('addTodo mutation  ', text);
-	    state.todos.push({
-	      text: text,
-	      done: false
-	    });
-	  },
-	  deleteTodo: function deleteTodo(state, _ref2) {
-	    var todo = _ref2.todo;
-
-	    state.todos.splice(state.todos.indexOf(todo), 1);
-	  },
-	  toggleTodo: function toggleTodo(state, _ref3) {
-	    var todo = _ref3.todo;
-
-	    todo.done = !todo.done;
-	  },
-	  editTodo: function editTodo(state, _ref4) {
-	    var todo = _ref4.todo,
-	        value = _ref4.value;
-
-	    todo.text = value;
-	  },
-	  toggleAll: function toggleAll(state, _ref5) {
-	    var done = _ref5.done;
-
-	    state.todos.forEach(function (todo) {
-	      todo.done = done;
-	    });
-	  },
-	  clearCompleted: function clearCompleted(state) {
-	    state.todos = state.todos.filter(function (todo) {
-	      return !todo.done;
-	    });
-	  }
-	};
-
-/***/ },
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _mutations = __webpack_require__(302);
-
-	var _logger = __webpack_require__(304);
-
-	var _logger2 = _interopRequireDefault(_logger);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// 定义一个函数  localxxx = function(store){..}
-	var localStoragePlugin = function localStoragePlugin(store) {
-	  store.subscribe(function (mutation, _ref) {
-	    var todos = _ref.todos;
-
-	    window.localStorage.setItem(_mutations.STORAGE_KEY, JSON.stringify(todos));
-	  });
-	};
-
-	exports.default = process.env.NODE_ENV !== 'production' ? [(0, _logger2.default)(), localStoragePlugin] : [localStoragePlugin];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(295)))
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _h('div', {
+	    attrs: {
+	      "id": "app"
+	    }
+	  }, ["\n    Clicked: " + _vm._s(_vm.$store.state.count) + " times, count is " + _vm._s(_vm.evenOrOdd) + ".\n    ", _h('button', {
+	    on: {
+	      "click": _vm.increment
+	    }
+	  }, ["+"]), " ", _h('button', {
+	    on: {
+	      "click": _vm.decrement
+	    }
+	  }, ["-"]), " ", _h('button', {
+	    on: {
+	      "click": _vm.incrementIfOdd
+	    }
+	  }, ["Increment if odd"]), " ", _h('button', {
+	    on: {
+	      "click": _vm.incrementAsync
+	    }
+	  }, ["Increment async"])])
+	},staticRenderFns: []}
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-25bedc2c", module.exports)
+	  }
+	}
 
 /***/ },
 /* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	(function (global, factory) {
-	  ( false ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() :  true ? !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : global.createVuexLogger = factory();
-	})(undefined, function () {
-	  'use strict';
-
-	  /**
-	   * Get the first item that pass the test
-	   * by second argument function
-	   *
-	   * @param {Array} list
-	   * @param {Function} f
-	   * @return {*}
-	   */
-
-	  function find(list, f) {
-	    return list.filter(f)[0];
-	  }
-
-	  /**
-	   * Deep copy the given object considering circular structure.
-	   * This function caches all nested objects and its copies.
-	   * If it detects circular structure, use cached copy to avoid infinite loop.
-	   *
-	   * @param {*} obj
-	   * @param {Array<Object>} cache
-	   * @return {*}
-	   */
-	  function deepCopy(obj, cache) {
-	    if (cache === void 0) cache = [];
-
-	    // just return if obj is immutable value
-	    if (obj === null || (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') {
-	      return obj;
-	    }
-
-	    // if obj is hit, it is in circular structure
-	    var hit = find(cache, function (c) {
-	      return c.original === obj;
-	    });
-	    if (hit) {
-	      return hit.copy;
-	    }
-
-	    var copy = Array.isArray(obj) ? [] : {};
-	    // put the copy into cache at first
-	    // because we want to refer it in recursive deepCopy
-	    cache.push({
-	      original: obj,
-	      copy: copy
-	    });
-
-	    Object.keys(obj).forEach(function (key) {
-	      copy[key] = deepCopy(obj[key], cache);
-	    });
-
-	    return copy;
-	  }
-
-	  // Credits: borrowed code from fcomb/redux-logger
-
-	  function createLogger(ref) {
-	    if (ref === void 0) ref = {};
-	    var collapsed = ref.collapsed;if (collapsed === void 0) collapsed = true;
-	    var transformer = ref.transformer;if (transformer === void 0) transformer = function transformer(state) {
-	      return state;
-	    };
-	    var mutationTransformer = ref.mutationTransformer;if (mutationTransformer === void 0) mutationTransformer = function mutationTransformer(mut) {
-	      return mut;
-	    };
-
-	    return function (store) {
-	      var prevState = deepCopy(store.state);
-
-	      store.subscribe(function (mutation, state) {
-	        if (typeof console === 'undefined') {
-	          return;
-	        }
-	        var nextState = deepCopy(state);
-	        var time = new Date();
-	        var formattedTime = " @ " + pad(time.getHours(), 2) + ":" + pad(time.getMinutes(), 2) + ":" + pad(time.getSeconds(), 2) + "." + pad(time.getMilliseconds(), 3);
-	        var formattedMutation = mutationTransformer(mutation);
-	        var message = "mutation " + mutation.type + formattedTime;
-	        var startMessage = collapsed ? console.groupCollapsed : console.group;
-
-	        // render
-	        try {
-	          startMessage.call(console, message);
-	        } catch (e) {
-	          console.log(message);
-	        }
-
-	        console.log('%c prev state', 'color: #9E9E9E; font-weight: bold', transformer(prevState));
-	        console.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
-	        console.log('%c next state', 'color: #4CAF50; font-weight: bold', transformer(nextState));
-
-	        try {
-	          console.groupEnd();
-	        } catch (e) {
-	          console.log('—— log end ——');
-	        }
-
-	        prevState = nextState;
-	      });
-	    };
-	  }
-
-	  function repeat(str, times) {
-	    return new Array(times + 1).join(str);
-	  }
-
-	  function pad(num, maxLength) {
-	    return repeat('0', maxLength - num.toString().length) + num;
-	  }
-
-	  return createLogger;
-	});
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* styles */
-	__webpack_require__(306)
-
-	/* script */
-	__vue_exports__ = __webpack_require__(310)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(314)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/luonan/Sites/vue_demo/vuex-mytest/vuex/examples/todomvc/components/App.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-6a5af290", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-6a5af290", __vue_options__)
-	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] App.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-	module.exports = __vue_exports__
-
-
-/***/ },
-/* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(307);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(309)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../css-loader/index.js!./../vue-loader/lib/style-rewriter.js?id=data-v-6a5af290!./index.css", function() {
-				var newContent = require("!!./../css-loader/index.js!./../vue-loader/lib/style-rewriter.js?id=data-v-6a5af290!./index.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 307 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(308)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\nhtml,\nbody {\n\tmargin: 0;\n\tpadding: 0;\n}\nbutton {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tbackground: none;\n\tfont-size: 100%;\n\tvertical-align: baseline;\n\tfont-family: inherit;\n\tfont-weight: inherit;\n\tcolor: inherit;\n\t-webkit-appearance: none;\n\tappearance: none;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\nbody {\n\tfont: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;\n\tline-height: 1.4em;\n\tbackground: #f5f5f5;\n\tcolor: #4d4d4d;\n\tmin-width: 230px;\n\tmax-width: 550px;\n\tmargin: 0 auto;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n\tfont-weight: 300;\n}\n:focus {\n\toutline: 0;\n}\n.hidden {\n\tdisplay: none;\n}\n.todoapp {\n\tbackground: #fff;\n\tmargin: 130px 0 40px 0;\n\tposition: relative;\n\tbox-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),\n\t            0 25px 50px 0 rgba(0, 0, 0, 0.1);\n}\n.todoapp input::-webkit-input-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n.todoapp input::-moz-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n.todoapp input::input-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n.todoapp h1 {\n\tposition: absolute;\n\ttop: -155px;\n\twidth: 100%;\n\tfont-size: 100px;\n\tfont-weight: 100;\n\ttext-align: center;\n\tcolor: rgba(175, 47, 47, 0.15);\n\t-webkit-text-rendering: optimizeLegibility;\n\t-moz-text-rendering: optimizeLegibility;\n\ttext-rendering: optimizeLegibility;\n}\n.new-todo,\n.edit {\n\tposition: relative;\n\tmargin: 0;\n\twidth: 100%;\n\tfont-size: 24px;\n\tfont-family: inherit;\n\tfont-weight: inherit;\n\tline-height: 1.4em;\n\tborder: 0;\n\tcolor: inherit;\n\tpadding: 6px;\n\tborder: 1px solid #999;\n\tbox-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n\tbox-sizing: border-box;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\n.new-todo {\n\tpadding: 16px 16px 16px 60px;\n\tborder: none;\n\tbackground: rgba(0, 0, 0, 0.003);\n\tbox-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);\n}\n.main {\n\tposition: relative;\n\tz-index: 2;\n\tborder-top: 1px solid #e6e6e6;\n}\nlabel[for='toggle-all'] {\n\tdisplay: none;\n}\n.toggle-all {\n\tposition: absolute;\n\ttop: -55px;\n\tleft: -12px;\n\twidth: 60px;\n\theight: 34px;\n\ttext-align: center;\n\tborder: none; /* Mobile Safari */\n}\n.toggle-all:before {\n\tcontent: '\\276F';\n\tfont-size: 22px;\n\tcolor: #e6e6e6;\n\tpadding: 10px 27px 10px 27px;\n}\n.toggle-all:checked:before {\n\tcolor: #737373;\n}\n.todo-list {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n.todo-list li {\n\tposition: relative;\n\tfont-size: 24px;\n\tborder-bottom: 1px solid #ededed;\n}\n.todo-list li:last-child {\n\tborder-bottom: none;\n}\n.todo-list li.editing {\n\tborder-bottom: none;\n\tpadding: 0;\n}\n.todo-list li.editing .edit {\n\tdisplay: block;\n\twidth: 506px;\n\tpadding: 12px 16px;\n\tmargin: 0 0 0 43px;\n}\n.todo-list li.editing .view {\n\tdisplay: none;\n}\n.todo-list li .toggle {\n\ttext-align: center;\n\twidth: 40px;\n\t/* auto, since non-WebKit browsers doesn't support input styling */\n\theight: auto;\n\tposition: absolute;\n\ttop: 0;\n\tbottom: 0;\n\tmargin: auto 0;\n\tborder: none; /* Mobile Safari */\n\t-webkit-appearance: none;\n\tappearance: none;\n}\n.todo-list li .toggle:after {\n\tcontent: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"-10 -18 100 135\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"none\" stroke=\"#ededed\" stroke-width=\"3\"/></svg>');\n}\n.todo-list li .toggle:checked:after {\n\tcontent: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"-10 -18 100 135\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"none\" stroke=\"#bddad5\" stroke-width=\"3\"/><path fill=\"#5dc2af\" d=\"M72 25L42 71 27 56l-4 4 20 20 34-52z\"/></svg>');\n}\n.todo-list li label {\n\tword-break: break-all;\n\tpadding: 15px 60px 15px 15px;\n\tmargin-left: 45px;\n\tdisplay: block;\n\tline-height: 1.2;\n\ttransition: color 0.4s;\n}\n.todo-list li.completed label {\n\tcolor: #d9d9d9;\n\ttext-decoration: line-through;\n}\n.todo-list li .destroy {\n\tdisplay: none;\n\tposition: absolute;\n\ttop: 0;\n\tright: 10px;\n\tbottom: 0;\n\twidth: 40px;\n\theight: 40px;\n\tmargin: auto 0;\n\tfont-size: 30px;\n\tcolor: #cc9a9a;\n\tmargin-bottom: 11px;\n\ttransition: color 0.2s ease-out;\n}\n.todo-list li .destroy:hover {\n\tcolor: #af5b5e;\n}\n.todo-list li .destroy:after {\n\tcontent: '\\D7';\n}\n.todo-list li:hover .destroy {\n\tdisplay: block;\n}\n.todo-list li .edit {\n\tdisplay: none;\n}\n.todo-list li.editing:last-child {\n\tmargin-bottom: -1px;\n}\n.footer {\n\tcolor: #777;\n\tpadding: 10px 15px;\n\theight: 20px;\n\ttext-align: center;\n\tborder-top: 1px solid #e6e6e6;\n}\n.footer:before {\n\tcontent: '';\n\tposition: absolute;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\theight: 50px;\n\toverflow: hidden;\n\tbox-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),\n\t            0 8px 0 -3px #f6f6f6,\n\t            0 9px 1px -3px rgba(0, 0, 0, 0.2),\n\t            0 16px 0 -6px #f6f6f6,\n\t            0 17px 2px -6px rgba(0, 0, 0, 0.2);\n}\n.todo-count {\n\tfloat: left;\n\ttext-align: left;\n}\n.todo-count strong {\n\tfont-weight: 300;\n}\n.filters {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n\tposition: absolute;\n\tright: 0;\n\tleft: 0;\n}\n.filters li {\n\tdisplay: inline;\n}\n.filters li a {\n\tcolor: inherit;\n\tmargin: 3px;\n\tpadding: 3px 7px;\n\ttext-decoration: none;\n\tborder: 1px solid transparent;\n\tborder-radius: 3px;\n}\n.filters li a:hover {\n\tborder-color: rgba(175, 47, 47, 0.1);\n}\n.filters li a.selected {\n\tborder-color: rgba(175, 47, 47, 0.2);\n}\n.clear-completed,\nhtml .clear-completed:active {\n\tfloat: right;\n\tposition: relative;\n\tline-height: 20px;\n\ttext-decoration: none;\n\tcursor: pointer;\n}\n.clear-completed:hover {\n\ttext-decoration: underline;\n}\n.info {\n\tmargin: 65px auto 0;\n\tcolor: #bfbfbf;\n\tfont-size: 10px;\n\ttext-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);\n\ttext-align: center;\n}\n.info p {\n\tline-height: 1;\n}\n.info a {\n\tcolor: inherit;\n\ttext-decoration: none;\n\tfont-weight: 400;\n}\n.info a:hover {\n\ttext-decoration: underline;\n}\n\n/*\n\tHack to remove background from Mobile Safari.\n\tCan't use it globally since it destroys checkboxes in Firefox\n*/\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n.toggle-all,\n\t.todo-list li .toggle {\n\t\tbackground: none;\n}\n.todo-list li .toggle {\n\t\theight: 40px;\n}\n.toggle-all {\n\t\t-webkit-transform: rotate(90deg);\n\t\ttransform: rotate(90deg);\n\t\t-webkit-appearance: none;\n\t\tappearance: none;\n}\n}\n@media (max-width: 430px) {\n.footer {\n\t\theight: 50px;\n}\n.filters {\n\t\tbottom: 10px;\n}\n}\n", ""]);
-
-	// exports
-
-
-/***/ },
-/* 308 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
-
-/***/ },
-/* 309 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if (media) {
-			styleElement.setAttribute("media", media);
-		}
-
-		if (sourceMap) {
-			// https://developer.chrome.com/devtools/docs/javascript-debugging
-			// this makes source maps inside style tags work properly in Chrome
-			css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	var _vue = __webpack_require__(299);
 
-	var _vuex = __webpack_require__(301);
+	var _vue2 = _interopRequireDefault(_vue);
 
-	var _Todo = __webpack_require__(311);
+	var _vuex = __webpack_require__(302);
 
-	var _Todo2 = _interopRequireDefault(_Todo);
+	var _vuex2 = _interopRequireDefault(_vuex);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// 定义了一些函数  filter用的函数  在下面的computed会用到
-	var filters = {
-	    all: function all(todos) {
-	        return todos;
-	    },
-	    active: function active(todos) {
-	        return todos.filter(function (todo) {
-	            return !todo.done;
-	        });
-	    },
-	    completed: function completed(todos) {
-	        return todos.filter(function (todo) {
-	            return todo.done;
-	        });
-	    }
+	_vue2.default.use(_vuex2.default);
+
+	// root state object.
+	// each Vuex instance is just a single state tree.
+	var state = {
+	  count: 0
 	};
 
-	//由于使用了vue-loader 所以Component可以用vue文件的方式来写
-	//一个xx.vue就是一个组件  相当于 Vue.component('xx', ...);
-	exports.default = {
-	    name: 'app', //component的名字
-	    components: {
-	        Todo: _Todo2.default
-	    },
-	    data: function data() {
-	        return {
-	            visibility: 'all',
-	            filters: filters,
-	            todos: this.$store.state.todos
-	        };
-	    },
-
-	    computed: {
-
-	        // 通过增加一个computed函数的方式  使得this下有了一个todos变量
-	        // 个人觉得这样实现不太易懂  就把todos放到data中了
-	        // todos () {
-	        //   return this.$store.state.todos
-	        // },
-	        allChecked: function allChecked() {
-	            return this.todos.every(function (todo) {
-	                return todo.done;
-	            });
-	        },
-	        filteredTodos: function filteredTodos() {
-	            return filters[this.visibility](this.todos);
-	        },
-	        remaining: function remaining() {
-	            return this.todos.filter(function (todo) {
-	                return !todo.done;
-	            }).length;
-	        }
-	    },
-	    methods: _extends({
-	        addTodoEvent: function addTodoEvent(e) {
-	            var text = e.target.value;
-	            if (text.trim()) {
-
-	                // this.$store.commit('addTodo', {
-	                //     text
-	                // })
-	                this.addTodo({ text: text });
-	            }
-	            e.target.value = '';
-	        }
-	    }, (0, _vuex.mapMutations)(['addTodo', 'toggleAll', 'clearCompleted'])),
-
-	    //Vue2 的filters的定义和Vue1.x 不同
-	    filters: {
-	        //复数
-	        pluralize: function pluralize(n, w) {
-	            return n === 1 ? w : w + 's';
-	        },
-	        capitalize: function capitalize(s) {
-	            return s.charAt(0).toUpperCase() + s.slice(1);
-	        }
-	    }
-	};
-
-/***/ },
-/* 311 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = {}
-
-	/* script */
-	__vue_exports__ = __webpack_require__(312)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(313)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/luonan/Sites/vue_demo/vuex-mytest/vuex/examples/todomvc/components/Todo.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-50cc9467", __vue_options__)
-	  } else {
-	    hotAPI.reload("data-v-50cc9467", __vue_options__)
+	// mutations are operations that actually mutates the state.
+	// each mutation handler gets the entire state tree as the
+	// first argument, followed by additional payload arguments.
+	// mutations must be synchronous and can be recorded by plugins
+	// for debugging purposes.
+	var mutations = {
+	  increment: function increment(state) {
+	    state.count++;
+	  },
+	  decrement: function decrement(state) {
+	    state.count--;
 	  }
-	})()}
-	if (__vue_options__.functional) {console.error("[vue-loader] Todo.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+	};
 
-	module.exports = __vue_exports__
+	// actions are functions that causes side effects and can involve
+	// asynchronous operations.
 
 
-/***/ },
-/* 312 */
-/***/ function(module, exports, __webpack_require__) {
+	//
+	var actions = {
+	  increment: function increment(_ref) {
+	    var commit = _ref.commit;
+	    return commit('increment');
+	  },
+	  decrement: function decrement(_ref2) {
+	    var commit = _ref2.commit;
+	    return commit('decrement');
+	  },
+	  incrementIfOdd: function incrementIfOdd(_ref3) {
+	    var commit = _ref3.commit,
+	        state = _ref3.state;
 
-	'use strict';
+	    if ((state.count + 1) % 2 === 0) {
+	      commit('increment');
+	    }
+	  },
+	  incrementAsync: function incrementAsync(_ref4) {
+	    var commit = _ref4.commit;
 
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	    return new Promise(function (resolve, reject) {
+	      setTimeout(function () {
+	        commit('increment');
+	        resolve();
+	      }, 1000);
+	    });
+	  }
+	};
+
+	// getters are functions
+	var getters = {
+	  evenOrOdd: function evenOrOdd(state) {
+	    return state.count % 2 === 0 ? 'even' : 'odd';
+	  }
+	};
+
+	// A Vuex instance is created by combining the state, mutations, actions,
+	// and getters.
+	exports.default = new _vuex2.default.Store({
+	  state: state,
+	  getters: getters,
+	  actions: actions,
+	  mutations: mutations
 	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	var _vuex = __webpack_require__(301);
-
-	exports.default = {
-	    name: 'Todo',
-	    props: ['todo'],
-	    data: function data() {
-	        return {
-	            editing: false
-	        };
-	    },
-
-	    directives: {
-	        focus: function focus(el, _ref, _ref2) {
-	            var value = _ref.value;
-	            var context = _ref2.context;
-
-	            if (value) {
-	                context.$nextTick(function () {
-	                    el.focus();
-	                });
-	            }
-	        }
-	    },
-	    methods: _extends({}, (0, _vuex.mapMutations)(['toggleTodo', 'editTodo', 'deleteTodo']), {
-	        //toggleTodo 就会映射为(更通俗点  是创建了一个toggleTodo的方法, 其中有this.$store.commit语句)
-	        // toggleTodo(obj) {
-	        //     this.$store.commit('toggleTodo', obj);
-	        // },
-	        //同理 editTodo会实际上相当于
-	        // editTodo (payload) {
-	        //     this.$store.commit('editTodo', payload)
-	        // },
-	        doneEdit: function doneEdit(e) {
-	            var value = e.target.value.trim();
-	            var todo = this.todo; //读取props 中的todo
-
-	            if (!value) {
-	                this.deleteTodo({
-	                    todo: todo
-	                });
-	            } else if (this.editing) {
-
-	                //参数对应mutation中的定义的editTodo
-	                this.editTodo({
-	                    todo: todo,
-	                    value: value
-	                });
-	                this.editing = false;
-	            }
-	        },
-	        cancelEdit: function cancelEdit(e) {
-	            e.target.value = this.todo.text;
-	            this.editing = false;
-	        }
-	    })
-	};
-
-/***/ },
-/* 313 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('li', {
-	    staticClass: "todo",
-	    class: {
-	      completed: _vm.todo.done, editing: _vm.editing
-	    }
-	  }, [_h('div', {
-	    staticClass: "view"
-	  }, [_h('input', {
-	    staticClass: "toggle",
-	    attrs: {
-	      "type": "checkbox"
-	    },
-	    domProps: {
-	      "checked": _vm.todo.done
-	    },
-	    on: {
-	      "change": function($event) {
-	        _vm.toggleTodo({
-	          todo: _vm.todo
-	        })
-	      }
-	    }
-	  }), " ", _h('label', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.todo.text)
-	    },
-	    on: {
-	      "dblclick": function($event) {
-	        _vm.editing = true
-	      }
-	    }
-	  }), " ", _h('button', {
-	    staticClass: "destroy",
-	    on: {
-	      "click": function($event) {
-	        _vm.deleteTodo({
-	          todo: _vm.todo
-	        })
-	      }
-	    }
-	  })]), " ", " ", _h('input', {
-	    directives: [{
-	      name: "show",
-	      rawName: "v-show",
-	      value: (_vm.editing),
-	      expression: "editing"
-	    }, {
-	      name: "focus",
-	      rawName: "v-focus",
-	      value: (_vm.editing),
-	      expression: "editing"
-	    }],
-	    staticClass: "edit",
-	    domProps: {
-	      "value": _vm.todo.text
-	    },
-	    on: {
-	      "keyup": [function($event) {
-	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
-	        _vm.doneEdit($event)
-	      }, function($event) {
-	        if (_vm._k($event.keyCode, "esc", 27)) { return; }
-	        _vm.cancelEdit($event)
-	      }],
-	      "blur": _vm.doneEdit
-	    }
-	  })])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-50cc9467", module.exports)
-	  }
-	}
-
-/***/ },
-/* 314 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
-	  return _h('section', {
-	    staticClass: "todoapp"
-	  }, [_h('header', {
-	    staticClass: "header"
-	  }, [_h('h1', ["todos"]), " ", _h('input', {
-	    staticClass: "new-todo",
-	    attrs: {
-	      "autofocus": "",
-	      "autocomplete": "off",
-	      "placeholder": "What needs to be done?"
-	    },
-	    on: {
-	      "keyup": function($event) {
-	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
-	        _vm.addTodoEvent($event)
-	      }
-	    }
-	  })]), " ", " ", _h('section', {
-	    directives: [{
-	      name: "show",
-	      rawName: "v-show",
-	      value: (_vm.todos.length),
-	      expression: "todos.length"
-	    }],
-	    staticClass: "main"
-	  }, [_h('input', {
-	    staticClass: "toggle-all",
-	    attrs: {
-	      "type": "checkbox"
-	    },
-	    domProps: {
-	      "checked": _vm.allChecked
-	    },
-	    on: {
-	      "change": function($event) {
-	        _vm.toggleAll({
-	          done: !_vm.allChecked
-	        })
-	      }
-	    }
-	  }), " ", _h('ul', {
-	    staticClass: "todo-list"
-	  }, [_vm._l((_vm.filteredTodos), function(todo) {
-	    return _h('todo', {
-	      attrs: {
-	        "todo": todo
-	      }
-	    })
-	  })])]), " ", " ", _h('footer', {
-	    directives: [{
-	      name: "show",
-	      rawName: "v-show",
-	      value: (_vm.todos.length),
-	      expression: "todos.length"
-	    }],
-	    staticClass: "footer"
-	  }, [_h('span', {
-	    staticClass: "todo-count"
-	  }, [_h('strong', [_vm._s(_vm.remaining)]), "\n        " + _vm._s(_vm._f("pluralize")(_vm.remaining, 'item')) + " left\n      "]), " ", _h('ul', {
-	    staticClass: "filters"
-	  }, [_vm._l((_vm.filters), function(val, key) {
-	    return _h('li', [_h('a', {
-	      class: {
-	        selected: _vm.visibility === key
-	      },
-	      attrs: {
-	        "href": '#/' + key
-	      },
-	      on: {
-	        "click": function($event) {
-	          _vm.visibility = key
-	        }
-	      }
-	    }, [_vm._s(_vm._f("capitalize")(key))])])
-	  })]), " ", _h('button', {
-	    directives: [{
-	      name: "show",
-	      rawName: "v-show",
-	      value: (_vm.todos.length > _vm.remaining),
-	      expression: "todos.length > remaining"
-	    }],
-	    staticClass: "clear-completed",
-	    on: {
-	      "click": _vm.clearCompleted
-	    }
-	  }, ["\n        Clear completed\n      "])])])
-	},staticRenderFns: []}
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-6a5af290", module.exports)
-	  }
-	}
 
 /***/ }
 /******/ ]);
