@@ -51,9 +51,9 @@ const filters = {
 //由于使用了vue-loader 所以Component可以用vue文件的方式来写
 //一个xx.vue就是一个组件  相当于 Vue.component('xx', ...);
 export default {
-    name: 'app', //component的名字
+    name: 'app', //定义该component的名字
     components: {
-        Todo
+        Todo  //该组件用到的子组件在这里声明
     },
     data() {
         return {
@@ -95,6 +95,10 @@ export default {
         //这里的...实际上是ES6的 扩展语法
         //相当于给 methods {} 扩展出更多的key
         // mapMutations 的执行结果是一个{}对象
+        // addTodo会处理为
+        // addTodo (payload) {
+        //     this.$store.commit('addTodo', payload) //通过commit调用mutation定义的方法
+        // },
         ...mapMutations([
             'addTodo',
             'toggleAll',

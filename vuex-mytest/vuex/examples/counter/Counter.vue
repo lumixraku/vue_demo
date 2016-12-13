@@ -39,7 +39,7 @@ export default {
     //这里这个对象有四个key
     //
     //'increment': function(){
-    // this.$store.dispatch('increment')
+    // this.$store.dispatch('increment')  //通过$store.dispatch('methodname')调用action中的方法
     // }
     methods: mapActions([
         'increment',

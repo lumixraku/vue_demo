@@ -27,7 +27,7 @@ const mutations = {
 // asynchronous operations.
 
 
-//
+//通过 commit('methodname') 调用mutation中的方法
 const actions = {
   increment: ({ commit }) => commit('increment'),
   decrement: ({ commit }) => commit('decrement'),

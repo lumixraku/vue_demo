@@ -7,6 +7,7 @@ export function getAllMessages (cb) {
   }, LATENCY)
 }
 
+//这里是模拟网络请求的样子  所以使用延迟 + 回调的方式
 export function createMessage ({ text, thread }, cb) {
   const timestamp = Date.now()
   const id = 'm_' + timestamp

@@ -3,6 +3,8 @@ import * as types from './mutation-types'
 
 export const getAllMessages = ({ commit }) => {
   api.getAllMessages(messages => {
+
+    //commit调用的是 mutations中定义的方法
     commit(types.RECEIVE_ALL, {
       messages
     })
