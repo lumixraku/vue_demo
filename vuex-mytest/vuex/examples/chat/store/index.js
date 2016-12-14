@@ -45,6 +45,19 @@ export default new Vuex.Store({
   mutations,
 })
 
+//actions相当于
+// {
+//     getAllMessages: getAllMessages,
+//     sendMessage: sendMessage,
+//     switchThread: switchThread
+// }
+// es6中也就是
+// {
+//     getAllMessages,
+//     sendMessage,
+//     switchThread
+// }
+
 
 //mutation 一般这样子
 // mutations: {

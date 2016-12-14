@@ -1,5 +1,6 @@
 import {set
 } from 'vue'
+// import * as Vue from 'Vue'
 import * as types from './mutation-types'
 // export const SWITCH_THREAD = 'SWITCH_THREAD'
 // export const RECEIVE_ALL = 'RECEIVE_ALL'
@@ -49,6 +50,15 @@ function createThread(state, id, name) {
         messages: [],
         lastMessage: null
     })
+
+    //如果你引入import * as Vue from 'vue'
+    //那么就是这么调用
+    // Vue.set(state.threads, id,{
+    //     id,
+    //     name,
+    //     messages: [],
+    //     lastMessage: null
+    // })
 }
 
 function addMessage(state, message) {

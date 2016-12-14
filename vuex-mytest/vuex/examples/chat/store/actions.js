@@ -1,6 +1,15 @@
 import * as api from '../api'
 import * as types from './mutation-types'
 
+
+//一个action的定义
+// {
+//     methodA: ({commit}) => {
+//         ....
+//     }
+// }
+
+
 export const getAllMessages = ({ commit }) => {
   api.getAllMessages(messages => {
 
