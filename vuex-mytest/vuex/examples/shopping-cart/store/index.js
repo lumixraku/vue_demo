@@ -4,19 +4,21 @@ import * as actions from './actions'
 import * as getters from './getters'
 import cart from './modules/cart'
 import products from './modules/products'
-import createLogger from '../../../src/plugins/logger'
+// import createLogger from '../../../src/plugins/logger'
 
 Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production'
+// const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   actions,
   getters,
+
+  //modules 可以将多个 定义的store 合并起来
   modules: {
     cart,
     products
   },
-  strict: debug,
-  plugins: debug ? [createLogger()] : []
+  // strict: debug,
+  // plugins: debug ? [createLogger()] : []
 })

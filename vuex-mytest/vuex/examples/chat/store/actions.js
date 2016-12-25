@@ -3,13 +3,23 @@ import * as types from './mutation-types'
 
 
 //一个action的定义
-// {
-//     methodA: ({commit}) => {
-//         ....
+// store = {
+//     mutations: {
+//         addXX: (state, {xxx}) => {
+//             //....
+//         }
+//     },
+//     actions: {
+//         methodA: ({commit}) => {
+//             //...
+//         }
 //     }
 // }
 
 
+//定义上actions 是处理异步的
+//实际上就是在回调函数中调用了commit
+//然而你可以手动调用commit  直接在某个普通的函数中  this.$store.commit('type', {...})
 export const getAllMessages = ({ commit }) => {
   api.getAllMessages(messages => {
 
